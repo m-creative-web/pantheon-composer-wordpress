@@ -22,11 +22,11 @@
     "optimize-autoloader": true,
     "sort-packages": true,
     "platform": {
-      "php": "7.2"
+      "php": "8.1"
     }
   },
   "extra": {
-    "wordpress-install-dir": "web/wp",
+    "wordpress-install-dir": "web",
     "build-env": {
       "install-cms": [
         "wp core install --title={site-name} --url={site-url} --admin_user={account-name} --admin_email={account-mail} --admin_password={account-pass}",
@@ -46,19 +46,13 @@
     "psr-4": { "PantheonSystems\\WordHatHelpers\\": "tests/behat/helper_classes/" }
   },
   "scripts": {
-    "cleanup": [
-      "./scripts/composer/cleanup-composer"
-    ],
     "post-install-cmd": [
-      "@cleanup",
       "WordPressProject\\composer\\ScriptHandler::createRequiredFiles"
     ],
     "post-update-cmd": [
-      "@cleanup",
       "WordPressProject\\composer\\ScriptHandler::createRequiredFiles"
     ],
     "post-create-project-cmd": [
-      "@cleanup",
       "WordPressProject\\composer\\ScriptHandler::createRequiredFiles"
     ],
     "code-sniff": [
