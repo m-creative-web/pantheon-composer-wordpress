@@ -1,0 +1,50 @@
+name: wordpress-site
+recipe: pantheon
+config:
+  framework: wordpress
+  site: wordpress-site
+  id: wordpress-site-uuid
+  xdebug: off
+  index: false
+  edge: false
+  cache: true
+  composer_version: "2.2.12"
+services:
+  appserver:
+    type: php:8.2
+    config:
+      php: config/php.ini
+      vhosts: config/nginx.conf
+    overrides:
+      environment:
+        PHP_IDE_CONFIG: "serverName=appserver"
+        LANDO_HOST_IP: "host.docker.internal"
+        XDEBUG_CONFIG: "remote_enable=1 remote_host=host.docker.internal"
+  mailhog:
+    type: mailhog
+    hogfrom:
+      - appserver
+tooling:
+  drush:
+    service: appserver
+    env:
+      DRUSH_OPTIONS_URI: "https://wordpress-site.lndo.site"
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for nginx
+    cmd:
+      - echo "[INFO] Enabling xdebug ..."
+      - echo xdebug.mode = "debug,develop" > /usr/local/etc/php/conf.d/zzz-lando-xdebug.ini
+      - pkill -o -USR2 php-fpm
+    user: root
+  xdebug-off:
+    service: appserver
+    description: Disable xdebug for nginx
+    cmd:
+      - echo "[INFO] Disabling xdebug ..."
+      - echo xdebug.mode = "off" > /usr/local/etc/php/conf.d/zzz-lando-xdebug.ini
+      - pkill -o -USR2 php-fpm
+    user: root
+  proxy:
+    mailhog:
+      - mail.lndo.site

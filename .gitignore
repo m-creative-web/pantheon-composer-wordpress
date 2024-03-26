@@ -69,7 +69,6 @@ web/wp-content/advanced-cache.php
 web/wp-content/wp-cache-config.php
 web/sitemap.xml
 web/sitemap.xml.gz
-*.log
 
 # @TODO writable paths
 web/wp-content/cache/
@@ -112,3 +111,7 @@ Thumbs.db
 # SASS #
 ##########
 .sass-cache
+
+# Local #
+/.htaccess
+.idea
