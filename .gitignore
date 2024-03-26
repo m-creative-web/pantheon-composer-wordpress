@@ -29,6 +29,7 @@ web/wp-content/themes/*
 !web/wp-content/themes/custom/
 !web/wp-content/themes/.gitkeep
 !web/wp-content/config/
+web/wp
 !web/private/
 web/private/*
 !web/private/scripts/
@@ -68,6 +69,7 @@ web/wp-content/advanced-cache.php
 web/wp-content/wp-cache-config.php
 web/sitemap.xml
 web/sitemap.xml.gz
+*.log
 
 # @TODO writable paths
 web/wp-content/cache/

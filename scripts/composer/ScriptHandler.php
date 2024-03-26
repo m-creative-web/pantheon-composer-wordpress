@@ -27,6 +27,7 @@ class ScriptHandler
     $dirs = [
       'wp-content/plugins',
       'wp-content/themes',
+      'wp',
       'private/scripts/quicksilver',
     ];
 
